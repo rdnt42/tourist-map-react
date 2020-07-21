@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
-import Point from './components/Point'
+import PointsMap from './components/PointsMap';
 
 function App() {
   return (
-    <Point></Point>
+    <PointsMap></PointsMap>
   );
 }
 

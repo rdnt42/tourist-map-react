@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "geometry": [
+            55.669535,
+            36.712811
+        ],
+        "options": {
+            "preset": "islands#bluePoolIcon",
+            "iconColor": "#3caa3c"
+        },
+        "properties": {
+            "iconCaption": "8.5/10",
+            "hintContent": "Кликните, чтобы посмотреть описание",
+            "balloonContent": "<a href=\"https://yandex.ru/maps/213/moscow/?ll=37.622504%2C55.753215&z=10\" target=\"_blank\">Как добраться</a>  <br /> <a>Болото сима, делает фьюр-фьюрк. <br />Мелкое, классное, твое.</a> "
+        },
+        "modules": [
+            "geoObject.addon.balloon",
+            "geoObject.addon.hint"
+        ]
+    },
+    {
+        "id": 2,
+        "geometry": [
+            55.604362,
+            36.551704
+        ],
+        "options": {
+            "preset": "islands#bluePoolIcon",
+            "iconColor": "#3caa3c"
+        },
+        "properties": {
+            "iconCaption": "7/10",
+            "hintContent": "Кликните, чтобы посмотреть описание",
+            "balloonContent": "<a href=\"https://yandex.ru/maps/213/moscow/?ll=37.622504%2C55.753215&z=10\" target=\"_blank\">Как добраться</a>  <br /> <a>Место для турслетов на берегу реки Москва <br />Раньше было лучше.</a> "
+        },
+        "modules": [
+            "geoObject.addon.balloon",
+            "geoObject.addon.hint"
+        ]
+    },
+    {
+        "id": 3,
+        "geometry": [
+            55.284529,
+            38.803223
+        ],
+        "options": {
+            "preset": "islands#bluePoolIcon",
+            "iconColor": "#3caa3c"
+        },
+        "properties": {
+            "iconCaption": "9/10",
+            "hintContent": "Кликните, чтобы посмотреть описание",
+            "balloonContent": "<a href=\"https://yandex.ru/maps/213/moscow/?ll=37.622504%2C55.753215&z=10\" target=\"_blank\">Как добраться</a>  <br /> <a>Два озера и чудесный лес <br />Top place.</a> "
+        },
+        "modules": [
+            "geoObject.addon.balloon",
+            "geoObject.addon.hint"
+        ]
+    }
+]
