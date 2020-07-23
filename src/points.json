@@ -10,13 +10,31 @@
             "iconColor": "#3caa3c"
         },
         "properties": {
-            "iconCaption": "8.5/10",
+            "iconCaption": "Сима 8.5/10",
             "hintContent": "Кликните, чтобы посмотреть описание",
             "balloonContent": "<a href=\"https://yandex.ru/maps/213/moscow/?ll=37.622504%2C55.753215&z=10\" target=\"_blank\">Как добраться</a>  <br /> <a>Болото сима, делает фьюр-фьюрк. <br />Мелкое, классное, твое.</a> "
         },
         "modules": [
             "geoObject.addon.balloon",
             "geoObject.addon.hint"
+        ],
+        "urls": [
+            {
+                "original": "https://drive.google.com/uc?export=view&id=1XH1XGuI8J737_oldBDC0_anSRXz4waxc",
+                "thumbnail": "https://drive.google.com/uc?export=view&id=1LyiR-TrT2Lof6FWfoJE1FxGKOI2el6wD"
+            },
+            {
+                "original": "https://drive.google.com/uc?export=view&id=1AfknaCaYtMilGCft10SnL_ZnAYKb_wou",
+                "thumbnail": "https://drive.google.com/uc?export=view&id=1Gyk0dU5yVq-flAWm5qe09dlQk9ehG1e8"
+            },
+            {
+                "original": "https://drive.google.com/uc?export=view&id=1loEE-J9g0jbzzXLvyHHS6hsvWUmD8Qej",
+                "thumbnail": "https://drive.google.com/uc?export=view&id=1XeXankZIVmQpSUvyR-Mp14_v59Cmz80P"
+            },
+            {
+                "original": "https://drive.google.com/uc?export=view&id=1qUoCe20P8V4EDeK6apaQ-M0Dh4LIDhO8",
+                "thumbnail": "https://drive.google.com/uc?export=view&id=1H2ny8dm_tD_8D40xdeXbykPDBTPorJoB"
+            }
         ]
     },
     {
@@ -30,7 +48,7 @@
             "iconColor": "#3caa3c"
         },
         "properties": {
-            "iconCaption": "7/10",
+            "iconCaption": "Полушкино 7/10",
             "hintContent": "Кликните, чтобы посмотреть описание",
             "balloonContent": "<a href=\"https://yandex.ru/maps/213/moscow/?ll=37.622504%2C55.753215&z=10\" target=\"_blank\">Как добраться</a>  <br /> <a>Место для турслетов на берегу реки Москва <br />Раньше было лучше.</a> "
         },
@@ -50,13 +68,61 @@
             "iconColor": "#3caa3c"
         },
         "properties": {
-            "iconCaption": "9/10",
+            "iconCaption": "Шиферная 9/10",
             "hintContent": "Кликните, чтобы посмотреть описание",
             "balloonContent": "<a href=\"https://yandex.ru/maps/213/moscow/?ll=37.622504%2C55.753215&z=10\" target=\"_blank\">Как добраться</a>  <br /> <a>Два озера и чудесный лес <br />Top place.</a> "
         },
         "modules": [
             "geoObject.addon.balloon",
             "geoObject.addon.hint"
+        ],
+        "urls": [
+            {
+                "original": "https://drive.google.com/uc?export=view&id=1R4YkUIEtX1wvZDzJXSk5mazjBIrMjyI7",
+                "thumbnail": "https://drive.google.com/uc?export=view&id=1R4YkUIEtX1wvZDzJXSk5mazjBIrMjyI7"
+            },
+            {
+                "original": "https://drive.google.com/uc?export=view&id=1VW1-rjoRHw7U37xFTvWLXzRohRuodFYP",
+                "thumbnail": "https://drive.google.com/uc?export=view&id=1VW1-rjoRHw7U37xFTvWLXzRohRuodFYP"
+            },
+            {
+                "original": "https://drive.google.com/uc?export=view&id=12LVlcyPb5sKK-DmmgRUlLBz5S87lFOtT",
+                "thumbnail": "https://drive.google.com/uc?export=view&id=12LVlcyPb5sKK-DmmgRUlLBz5S87lFOtT"
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "geometry": [
+            54.879771,
+            37.339621
+        ],
+        "options": {
+            "preset": "islands#bluePoolIcon",
+            "iconColor": "#3caa3c"
+        },
+        "properties": {
+            "iconCaption": "Ока 6.5/10",
+            "hintContent": "Кликните, чтобы посмотреть описание",
+            "balloonContent": "<a href=\"https://yandex.ru/maps/213/moscow/?ll=37.622504%2C55.753215&z=10\" target=\"_blank\">Как добраться</a>  <br /> <a>Берег реки Ока <br />Сильное течение, много отдыхающих на лодках</a> "
+        },
+        "modules": [
+            "geoObject.addon.balloon",
+            "geoObject.addon.hint"
+        ],
+        "urls": [
+            {
+                "original": "https://drive.google.com/uc?export=view&id=1pWXvgVHqKZs9GWTdl1IUclqFUayAfRRm",
+                "thumbnail": "https://drive.google.com/uc?export=view&id=1pWXvgVHqKZs9GWTdl1IUclqFUayAfRRm"
+            },
+            {
+                "original": "https://drive.google.com/uc?export=view&id=1sXqZRoCr70ZukIhR3bEmxIzHdk-4gSAf",
+                "thumbnail": "https://drive.google.com/uc?export=view&id=1sXqZRoCr70ZukIhR3bEmxIzHdk-4gSAf"
+            },
+            {
+                "original": "https://drive.google.com/uc?export=view&id=1guLZh4DY3F2lPlsgBkkAwpaCAlT4VbzU",
+                "thumbnail": "https://drive.google.com/uc?export=view&id=1guLZh4DY3F2lPlsgBkkAwpaCAlT4VbzU"
+            }
         ]
     }
 ]
