@@ -160,7 +160,7 @@ $ig-transparent: rgba(0, 0, 0, 0) !default;
   }
 
   .image-gallery-slide .image-gallery-image {
-    max-height: calc(100vh - 80vh); // 80 px for the thumbnail space
+    max-height: calc(100vh - 20vh); // 80 px for the thumbnail space
   }
 
   &.left,

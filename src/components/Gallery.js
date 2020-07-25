@@ -1,27 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import ImageGallery from 'react-image-gallery';
-import './scss/image-gallery.scss'
-import { MapConsumer } from '../context/mapContext'
-
-
-// const images = [
-//     {
-//         original: 'https://drive.google.com/uc?export=view&id=1XH1XGuI8J737_oldBDC0_anSRXz4waxc',
-//         thumbnail: 'https://drive.google.com/uc?export=view&id=1LyiR-TrT2Lof6FWfoJE1FxGKOI2el6wD',
-//     },
-//     {
-//         original: 'https://drive.google.com/uc?export=view&id=1AfknaCaYtMilGCft10SnL_ZnAYKb_wou',
-//         thumbnail: 'https://drive.google.com/uc?export=view&id=1Gyk0dU5yVq-flAWm5qe09dlQk9ehG1e8',
-//     },
-//     {
-//         original: 'https://drive.google.com/uc?export=view&id=1loEE-J9g0jbzzXLvyHHS6hsvWUmD8Qej',
-//         thumbnail: 'https://drive.google.com/uc?export=view&id=1XeXankZIVmQpSUvyR-Mp14_v59Cmz80P',
-//     },
-//     {
-//         original: 'https://drive.google.com/uc?export=view&id=1qUoCe20P8V4EDeK6apaQ-M0Dh4LIDhO8',
-//         thumbnail: 'https://drive.google.com/uc?export=view&id=1H2ny8dm_tD_8D40xdeXbykPDBTPorJoB',
-//     },
-// ];
+import './scss/image-gallery.scss';
+import { MapConsumer } from '../context/mapContext';
+import axios from 'axios';
+import config from '../config'
 
 class Gallery extends Component {
     constructor(props) {
@@ -43,6 +25,7 @@ class Gallery extends Component {
             slideOnThumbnailOver: false,
             thumbnailPosition: 'bottom',
             items: {},
+            selectPoint: 0
         }
     }
 
@@ -50,6 +33,21 @@ class Gallery extends Component {
         if (this.state.slideInterval !== prevState.slideInterval ||
             this.state.slideDuration !== prevState.slideDuration) {
         }
+    }
+
+    componentDidMount() {
+        //TODO изменить работу pointsMap Для полученя images
+        console.log('this.state.selectPoint ' + this.state.selectPoint)
+        axios.get('http://' + config.address + ':' + config.port + '/getPhotos?pointId=' + this.state.selectPoint)
+            .then(response => {
+                console.log(response.data)
+                console.log("Gallery Get data from server: OK")
+                //Add set images
+            })
+            .catch(error => {
+                alert("Не удалось связаться с сервером для получения данных")
+                throw error;
+            })
     }
 
     _onImageClick(event) {
@@ -97,14 +95,17 @@ class Gallery extends Component {
             <MapConsumer>
                 {
                     (val) => {
+                        console.log("selectPoint ", val.selectPoint)
                         return (
                             val.isShowGallery &&
                             <ImageGallery
-                                ref={i => this._imageGallery = i}
+                                selectPoint={val.selectPoint}
                                 items={val.images}
+                                onClick={val.switchOffGallery}
+
+                                ref={i => this._imageGallery = i}
                                 lazyLoad={false}
                                 // onClick={this._onImageClick.bind(this)}
-                                onClick={val.switchOffGallery}
                                 onImageLoad={this._onImageLoad}
                                 onSlide={this._onSlide.bind(this)}
                                 onPause={this._onPause.bind(this)}
