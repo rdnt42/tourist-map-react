@@ -7,7 +7,8 @@ function Point(placeMark) {
     const galleryState = useContext(MapContext);
     return (
 
-        <Placemark onClick={() => galleryState.switchOnGallery(placeMark.id)}
+        <Placemark
+            onClick={() => galleryState.switchOnGallery(placeMark.id)}
             geometry={placeMark.geometry}
             options={placeMark.options}
             properties={placeMark.properties}

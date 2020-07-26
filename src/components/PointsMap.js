@@ -3,9 +3,11 @@ import styles from './point.module.css';
 import { YMaps, Map } from 'react-yandex-maps';
 import PointsList from './PointsList';
 import Gallery from './Gallery';
-// import AliceGallery from './AliceGallery';
 import { MapProvider } from '../context/mapContext'
-import points from '../points.json'
+// import AliceGallery from './AliceGallery';
+//import points from '../points.json'
+
+
 
 
 const mapData = {
@@ -26,39 +28,43 @@ class PointsMap extends Component {
     }
 
     switchOffGallery = () => {
+        console.log("switchOffGallery ")
         this.setState({
             isShowGallery: false
         })
     }
 
     switchOnGallery = (placeMarkId) => {
-        //console.log("placeMarkId ", placeMarkId)
+        console.log("switchOnGallery ")
         this.setState({
-            selectPoint: placeMarkId
+            selectPoint: placeMarkId,
+            isShowGallery: true
         })
+
+        console.log("switchOnGallery selectPoint ", this.state.selectPoint)
         //FIXME изменить метод получения массива изображений
         //del
-        var pointsUrls = [{
-            original: "",
-            thumbnail: ""
-        }]
-        points.map(point => {
-            if (point.id === placeMarkId) {
-                if (point.urls !== undefined)
-                    pointsUrls = point.urls;
+        // var pointsUrls = [{
+        //     original: "",
+        //     thumbnail: ""
+        // }]
+        // points.map(point => {
+        //     if (point.id === placeMarkId) {
+        //         if (point.urls !== undefined)
+        //             pointsUrls = point.urls;
 
-                return true;
-            }
+        //         return true;
+        //     }
 
-            return true;
-        })
+        //     return true;
+        // })
 
-        this.setState({
-            isShowGallery: true,
-            images: pointsUrls
-        }, () => {
-            console.log(this.state.images)
-        })
+        // this.setState({
+        //     isShowGallery: true,
+        //     images: pointsUrls
+        // }, () => {
+        //     console.log(this.state.images)
+        // })
     }
 
     render() {
