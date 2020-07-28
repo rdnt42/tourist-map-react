@@ -1,32 +1,48 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import ImageGallery from 'react-image-gallery';
 import './scss/image-gallery.scss';
+import './scss/close-button.scss';
 import { MapContext } from '../context/mapContext'
 import axios from 'axios';
 import config from '../config'
+import errorImg from '../404.png';
 
 function Gallery() {
 
-    const [showIndex] = useState(true)
-    const [showBullets] = useState(true)
+    const [showIndex, setIndex] = useState(false)
+    const [showBullets, setBullets] = useState(false)
+    const [showNav, setNav] = useState(false)
+
     const [infinite] = useState(true)
     const [showThumbnails] = useState(true)
     const [showFullscreenButton] = useState(false)
     const [showGalleryFullscreenButton] = useState(false)
     const [showPlayButton] = useState(false)
     const [showGalleryPlayButton] = useState(false)
-    const [showNav] = useState(true)
     const [isRTL] = useState(false)
     const [slideDuration] = useState(450)
     const [slideInterval] = useState(2000)
     const [slideOnThumbnailOver] = useState(false)
     const [thumbnailPosition] = useState('bottom')
-    const [images, setImages] = useState([])
-    const [isShowGallery, setShowGallery] = useState(false)
 
-    function _onImageLoad(event) {
-        console.log('loaded image', event.target.src);
+    const [images, setImages] = useState([])
+
+    var refGallery = useRef(null)
+
+    //Show when thumbnail clicked
+    function showNavToImage() {
+        setBullets(true)
+        setIndex(true)
+        setNav(true)
     }
+
+    //hide when unmounting
+    function hideNavToImage() {
+        setBullets(false)
+        setIndex(false)
+        setNav(false)
+    }
+
 
     function parseResponse(listData) {
         const result = listData.map(data => {
@@ -40,44 +56,71 @@ function Gallery() {
         return result;
     }
 
-    const galleryState = useContext(MapContext);
+    /////////////// H A N D L E R S ///////////////
+    function closeButtonHandler() {
+        hideNavToImage()
+        mapContext.mapDispatch({ type: 'SWITCH_OFF_GALLERY', payload: mapContext.mapState.selectPoint })
+    }
+
+    function _onImageLoad(event) {
+        // console.log('loaded image', event.target.src);
+    }
+
+    function _onSlide(index) {
+        console.log('slid to index', index);
+    }
+
+    function _onThumbnailClick() {
+        if (showIndex === false)
+            showNavToImage();
+    }
+
+    function _onImageClick(event) {
+        refGallery.slideToIndex(refGallery.getCurrentIndex() + 1)
+        event.preventDefault();
+    }
+
+    const mapContext = useContext(MapContext);
 
     useEffect(() => {
-        //if gallery switch off by picture closing - reset local state
-        if (!galleryState.isShowGallery) {
-            setShowGallery(false);
-            return;
-        }
 
-        axios.get('http://' + config.address + ':' + config.port + '/getPhotos?pointId=' + galleryState.selectPoint)
+        axios.get(`http://${config.address}:${config.port}/getPhotos?pointId=${mapContext.mapState.selectPoint}`)
             .then(response => {
                 const data = parseResponse(response.data);
                 setImages(data);
-                //wait asunc answer and rise local state
-                setShowGallery(true);
 
-                console.log(data)
+                //console.log(data)
                 console.log("Gallery Get data from server: OK")
-                //Add set images
             })
             .catch(error => {
                 alert("Не удалось связаться с сервером для получения данных")
                 throw error;
             })
 
-    }, [galleryState.selectPoint, galleryState.isShowGallery])
+        return () => {
+            //Reset image state
+            setImages([])
+            hideNavToImage()
+        }
+    }, [mapContext.mapState.selectPoint])
 
 
     return (
-        <React.Fragment>
-            {isShowGallery &&
+        <span className="footer">
+            {images.length > 0 && <div className="close-button" onClick={closeButtonHandler}></div>}
+            {mapContext.mapState.isShowGallery && images.length > 0 &&
                 <ImageGallery
-                    selectPoint={galleryState.selectPoint}
+                    selectPoint={mapContext.mapState.selectPoint}
+                    onClick={_onImageClick}
                     items={images}
-                    onClick={galleryState.switchOffGallery}
+                    ref={i => refGallery = i}
 
-                    lazyLoad={false}
+                    //-1 hide original image
+                    startIndex={-1}
+                    onSlide={_onSlide}
+                    lazyLoad={true}
                     onImageLoad={_onImageLoad}
+                    onThumbnailClick={_onThumbnailClick}
                     infinite={infinite}
                     showBullets={showBullets}
                     showFullscreenButton={showFullscreenButton && showGalleryFullscreenButton}
@@ -90,146 +133,12 @@ function Gallery() {
                     slideDuration={parseInt(slideDuration)}
                     slideInterval={parseInt(slideInterval)}
                     slideOnThumbnailOver={slideOnThumbnailOver}
-                    additionalClass="app-image-gallery"
+                    onErrorImageURL={errorImg}
                 >
                 </ImageGallery>
             }
-        </React.Fragment>
+        </span>
     )
 }
 
 export default Gallery
-
-// class Gallery extends Component {
-//     constructor(props) {
-//         super(props)
-
-//         this.state = {
-//             showIndex: true,
-//             showBullets: true,
-//             infinite: true,
-//             showThumbnails: true,
-//             showFullscreenButton: true,
-//             showGalleryFullscreenButton: true,
-//             showPlayButton: false,
-//             showGalleryPlayButton: true,
-//             showNav: true,
-//             isRTL: false,
-//             slideDuration: 450,
-//             slideInterval: 2000,
-//             slideOnThumbnailOver: false,
-//             thumbnailPosition: 'bottom',
-//             items: {},
-//             selectPoint: 0
-//         }
-//     }
-
-//     componentDidUpdate(prevProps, prevState) {
-//         console.log('componentDidUpdate ' + this.state.selectPoint)
-//         if (this.state.slideInterval !== prevState.slideInterval ||
-//             this.state.slideDuration !== prevState.slideDuration) {
-//         }
-//     }
-
-//     componentDidMount() {
-//         //TODO изменить работу pointsMap Для полученя images
-//         console.log('this.state.selectPoint ' + this.state.selectPoint)
-//         axios.get('http://' + config.address + ':' + config.port + '/getPhotos?pointId=' + this.state.selectPoint)
-//             .then(response => {
-//                 console.log(response.data)
-//                 console.log("Gallery Get data from server: OK")
-//                 //Add set images
-//             })
-//             .catch(error => {
-//                 alert("Не удалось связаться с сервером для получения данных")
-//                 throw error;
-//             })
-//     }
-
-//     _onImageClick(event) {
-//         console.log('clicked on image', event.target, 'at index', this._imageGallery.getCurrentIndex());
-//         this.setState({
-//             isVisible: false
-//         })
-//     }
-
-//     _onImageLoad(event) {
-//         console.log('loaded image', event.target.src);
-//     }
-
-//     _onSlide(index) {
-//         console.log('slid to index', index);
-//     }
-
-//     _onPause(index) {
-//         console.log('paused on index', index);
-//     }
-
-//     _onScreenChange(fullScreenElement) {
-//         console.log('isFullScreen?', !!fullScreenElement);
-//     }
-
-//     _onPlay(index) {
-//         console.log('playing from index', index);
-//     }
-
-//     _handleInputChange(state, event) {
-//         this.setState({ [state]: event.target.value });
-//     }
-
-//     _handleCheckboxChange(state, event) {
-//         this.setState({ [state]: event.target.checked });
-//     }
-
-//     _handleThumbnailPositionChange(event) {
-//         this.setState({ thumbnailPosition: event.target.value });
-//     }
-
-
-//     render() {
-//         return (
-//             <MapConsumer>
-//                 {
-//                     (val) => {
-//                         console.log("Gallery selectPoint ", val.selectPoint)
-//                         return (
-//                             val.isShowGallery &&
-//                             <ImageGallery
-//                                 selectPoint={val.selectPoint}
-//                                 items={val.images}
-//                                 onClick={val.switchOffGallery}
-
-//                                 ref={i => this._imageGallery = i}
-//                                 lazyLoad={false}
-//                                 // onClick={this._onImageClick.bind(this)}
-//                                 onImageLoad={this._onImageLoad}
-//                                 onSlide={this._onSlide.bind(this)}
-//                                 onPause={this._onPause.bind(this)}
-//                                 onScreenChange={this._onScreenChange.bind(this)}
-//                                 onPlay={this._onPlay.bind(this)}
-//                                 infinite={this.state.infinite}
-//                                 showBullets={this.state.showBullets}
-//                                 showFullscreenButton={this.state.showFullscreenButton && this.state.showGalleryFullscreenButton}
-//                                 showPlayButton={this.state.showPlayButton && this.state.showGalleryPlayButton}
-//                                 showThumbnails={this.state.showThumbnails}
-//                                 showIndex={this.state.showIndex}
-//                                 showNav={this.state.showNav}
-//                                 isRTL={this.state.isRTL}
-//                                 thumbnailPosition={this.state.thumbnailPosition}
-//                                 slideDuration={parseInt(this.state.slideDuration)}
-//                                 slideInterval={parseInt(this.state.slideInterval)}
-//                                 slideOnThumbnailOver={this.state.slideOnThumbnailOver}
-//                                 additionalClass="app-image-gallery"
-//                             >
-//                             </ImageGallery>
-//                         )
-//                     }
-//                 }
-//             </MapConsumer>
-
-
-//         )
-//     }
-// }
-
-// export default Gallery

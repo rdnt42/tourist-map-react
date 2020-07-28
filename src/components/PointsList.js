@@ -33,11 +33,11 @@ function PointsList(props) {
     }
 
     useEffect(() => {
-        axios.get('http://' + config.address + ':' + config.port + '/getPoints')
+        axios.get(`http://${config.address}:${config.port}/getPoints`)
             .then(response => {
                 const data = parseResponse(response.data);
                 setPoints(data);
-                console.log("Points list Get data from server: OK")
+                console.log(`Points list Get data from server: OK. Items: ${data.length}`)
             })
             .catch(error => {
                 alert("Не удалось связаться с сервером для получения данных")
@@ -49,7 +49,6 @@ function PointsList(props) {
     // console.log('points ', points)
 
     return (
-
         <div>{pointsList}</div>
     )
 }

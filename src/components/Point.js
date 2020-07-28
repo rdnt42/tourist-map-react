@@ -4,11 +4,14 @@ import { MapContext } from '../context/mapContext'
 
 function Point(placeMark) {
 
-    const galleryState = useContext(MapContext);
-    return (
+    const mapContext = useContext(MapContext);
 
+    function markClickHandler() {
+        mapContext.mapDispatch({ type: 'SWITCH_ON_GALLERY', payload: placeMark.id })
+    }
+    return (
         <Placemark
-            onClick={() => galleryState.switchOnGallery(placeMark.id)}
+            onClick={markClickHandler}
             geometry={placeMark.geometry}
             options={placeMark.options}
             properties={placeMark.properties}

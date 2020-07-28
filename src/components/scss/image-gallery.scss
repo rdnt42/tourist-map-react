@@ -160,7 +160,7 @@ $ig-transparent: rgba(0, 0, 0, 0) !default;
   }
 
   .image-gallery-slide .image-gallery-image {
-    max-height: calc(100vh - 20vh); // 80 px for the thumbnail space
+    max-height: calc(100vh - 20vh); // 20vh for the thumbnail space
   }
 
   &.left,
@@ -277,7 +277,19 @@ $ig-transparent: rgba(0, 0, 0, 0) !default;
     }
   }
 }
-
+.footer {
+  // width: 100%;
+  // position: absolute;
+  // height: 50%;
+  // bottom: 0px;
+  margin: 0;
+  position: absolute;
+  bottom: 0%;
+  left: 50%;
+  margin-right: -50%;
+  max-width: 80%;
+  transform: translate(-50%, 0%);
+}
 .image-gallery-thumbnails-wrapper {
   position: relative;
 
@@ -414,4 +426,11 @@ $ig-transparent: rgba(0, 0, 0, 0) !default;
     font-size: 0.8em;
     padding: 5px 10px;
   }
+}
+
+:active,
+:hover,
+:focus {
+  outline: 0;
+  outline-offset: 0;
 }
