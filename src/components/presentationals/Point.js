@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { Placemark } from 'react-yandex-maps';
-import { MapContext } from '../context/mapContext'
+import { MapContext } from '../../context/mapContext'
 
 function Point(placeMark) {
 

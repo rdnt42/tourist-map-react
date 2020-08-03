@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Point from './Point'
 import axios from 'axios'
-import config from '../config'
-// import jpoints from '../points.json'
+import config from '../../config'
+import PointsList from '../presentationals/PointsList';
 
-function PointsList(props) {
+function PointsListContainer(props) {
 
     const [points, setPoints] = useState([]);
 
@@ -45,12 +44,9 @@ function PointsList(props) {
             })
     }, [])
 
-    const pointsList = points.map(point => <Point key={point.id} {...point}></Point>)
-    // console.log('points ', points)
-
     return (
-        <div>{pointsList}</div>
+        <PointsList points={points} />
     )
 }
 
-export default PointsList;
+export default PointsListContainer;

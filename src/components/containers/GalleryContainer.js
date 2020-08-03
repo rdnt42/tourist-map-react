@@ -1,13 +1,10 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
-import ImageGallery from 'react-image-gallery';
-import './scss/image-gallery.scss';
-import './scss/close-button.scss';
-import { MapContext } from '../context/mapContext'
+import { MapContext } from '../../context/mapContext'
 import axios from 'axios';
-import config from '../config'
-import errorImg from '../404.png';
+import config from '../../config'
+import Gallery from '../presentationals/Gallery';
 
-function Gallery() {
+function GalleryContainer() {
 
     const [showIndex, setIndex] = useState(false)
     const [showBullets, setBullets] = useState(false)
@@ -16,9 +13,7 @@ function Gallery() {
     const [infinite] = useState(true)
     const [showThumbnails] = useState(true)
     const [showFullscreenButton] = useState(false)
-    const [showGalleryFullscreenButton] = useState(false)
     const [showPlayButton] = useState(false)
-    const [showGalleryPlayButton] = useState(false)
     const [isRTL] = useState(false)
     const [slideDuration] = useState(450)
     const [slideInterval] = useState(2000)
@@ -105,40 +100,39 @@ function Gallery() {
     }, [mapContext.mapState.selectPoint])
 
 
-    return (
-        <span className="footer">
-            {images.length > 0 && <div className="close-button" onClick={closeButtonHandler}></div>}
-            {mapContext.mapState.isShowGallery && images.length > 0 &&
-                <ImageGallery
-                    selectPoint={mapContext.mapState.selectPoint}
-                    onClick={_onImageClick}
-                    items={images}
-                    ref={i => refGallery = i}
+    const states = {
+        showIndex: showIndex,
+        showBullets: showBullets,
+        showNav: showNav,
+        showThumbnails: showThumbnails,
+        showFullscreenButton: showFullscreenButton,
+        showPlayButton: showPlayButton,
 
-                    //-1 hide original image
-                    startIndex={-1}
-                    onSlide={_onSlide}
-                    lazyLoad={true}
-                    onImageLoad={_onImageLoad}
-                    onThumbnailClick={_onThumbnailClick}
-                    infinite={infinite}
-                    showBullets={showBullets}
-                    showFullscreenButton={showFullscreenButton && showGalleryFullscreenButton}
-                    showPlayButton={showPlayButton && showGalleryPlayButton}
-                    showThumbnails={showThumbnails}
-                    showIndex={showIndex}
-                    showNav={showNav}
-                    isRTL={isRTL}
-                    thumbnailPosition={thumbnailPosition}
-                    slideDuration={parseInt(slideDuration)}
-                    slideInterval={parseInt(slideInterval)}
-                    slideOnThumbnailOver={slideOnThumbnailOver}
-                    onErrorImageURL={errorImg}
-                >
-                </ImageGallery>
-            }
-        </span>
+        infinite: infinite,
+        isRTL: isRTL,
+        slideDuration: slideDuration,
+        slideInterval: slideInterval,
+        slideOnThumbnailOver: slideOnThumbnailOver,
+        thumbnailPosition: thumbnailPosition,
+    }
+
+    const handlers = {
+        _onImageClick: _onImageClick,
+        _onSlide: _onSlide,
+        _onImageLoad: _onImageLoad,
+        _onThumbnailClick: _onThumbnailClick,
+        closeButtonHandler: closeButtonHandler
+    }
+
+    return (
+        <Gallery
+            images={images}
+            states={states}
+            handlers={handlers}
+            refGallery={i => refGallery = i}
+            mapContext={mapContext}
+        />
     )
 }
 
-export default Gallery
+export default GalleryContainer

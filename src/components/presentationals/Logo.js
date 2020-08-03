@@ -6,8 +6,6 @@ function Logo(props) {
         <a className="sign" href="/">
             <span className="sign__word">Cyberpank is near</span>
         </a>
-
-        // <a className="link" target="_blank" href="https://markheggan.co.uk">Mark Heggan &rarr;</a>
     )
 }
 

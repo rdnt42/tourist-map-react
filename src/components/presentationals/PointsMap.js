@@ -1,9 +1,9 @@
 import React, { useReducer } from 'react'
 import styles from './css/point.module.css';
 import { YMaps, Map } from 'react-yandex-maps';
-import PointsList from './PointsList';
-import Gallery from './Gallery';
-import { MapContext } from '../context/mapContext'
+import { MapContext } from '../../context/mapContext'
+import PointsListContainer from '../containers/PointsListContainer';
+import GalleryContainer from '../containers/GalleryContainer';
 
 const mapData = {
     center: [55.669535, 36.712811],
@@ -44,10 +44,10 @@ function PointsMap() {
             <MapContext.Provider value={{ mapState: state, mapDispatch: dispatch }}>
                 < YMaps >
                     <Map defaultState={mapData} className={styles['point-map']}>
-                        <PointsList />
+                        <PointsListContainer />
                     </Map>
                 </YMaps >
-                <Gallery />
+                <GalleryContainer />
             </MapContext.Provider>
         </div>
     )

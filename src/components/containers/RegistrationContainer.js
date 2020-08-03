@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { login } from '../auth/authProvider'
-import config from '../config'
+import config from '../../config'
 import axios from 'axios'
-import './css/login-form.css'
+import Registration from '../presentationals/Registration';
 
-function Registration() {
+
+function RegistrationContainer() {
     const [credentials, setCredentials] = useState({
         name: '',
         password: ''
@@ -87,30 +87,16 @@ function Registration() {
 
     return (
         <>
-            <h1>Registration page</h1>
-            <form onSubmit={onSubmit}>
-                <label htmlFor="name">Email</label>
-                <input className={loginError.error}
-                    name="name"
-                    type="text"
-                    placeholder={loginError.message || "Enter your name"}
-                    value={credentials.name}
-                    onChange={onChange}
-                />
-                <label htmlFor="password">Password</label>
-                <input
-                    name="password"
-                    type="password"
-                    placeholder="Enter your password"
-                    value={credentials.password}
-                    onChange={onChange}
-                />
-                <button type="submit">Register</button>
-            </form>
+            <Registration
+                onSubmit={onSubmit}
+                onChange={onChange}
+                credentials={credentials}
+                loginError={loginError}
+            />
         </>
     )
 }
 
-export default Registration
+export default RegistrationContainer
 
 
