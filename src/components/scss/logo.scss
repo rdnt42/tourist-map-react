@@ -1,0 +1,65 @@
+.sign {
+  font-family: "Vibur", cursive;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__word {
+    font-size: 36px;
+    text-align: center;
+    line-height: 1;
+    color: #c6e2ff;
+    animation: neon 0.08s ease-in-out infinite alternate;
+  }
+}
+
+/*-- Animation Keyframes --*/
+
+// animation
+
+@keyframes neon {
+  from {
+    text-shadow: 0 0 6px rgba(202, 228, 225, 0.92),
+      0 0 30px rgba(202, 228, 225, 0.34), 0 0 12px rgba(30, 132, 242, 0.52),
+      0 0 21px rgba(30, 132, 242, 0.92), 0 0 34px rgba(30, 132, 242, 0.78),
+      0 0 54px rgba(30, 132, 242, 0.92);
+  }
+  to {
+    text-shadow: 0 0 6px rgba(202, 228, 225, 0.98),
+      0 0 30px rgba(202, 228, 225, 0.42), 0 0 12px rgba(30, 132, 242, 0.58),
+      0 0 22px rgba(30, 132, 242, 0.84), 0 0 38px rgba(30, 132, 242, 0.88),
+      0 0 60px rgba(30, 132, 242, 1);
+  }
+}
+
+@font-face {
+  font-family: "Vibur";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Vibur"),
+    url(https://fonts.gstatic.com/s/vibur/v11/DPEiYwmEzw0QRgTuJDs.woff2)
+      format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+// Link
+.link {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: #828282;
+  text-decoration: none;
+
+  &:focus,
+  &:hover {
+    color: #c6e2ff;
+    text-shadow: 0 0 2px rgba(202, 228, 225, 0.92),
+      0 0 10px rgba(202, 228, 225, 0.34), 0 0 4px rgba(30, 132, 242, 0.52),
+      0 0 7px rgba(30, 132, 242, 0.92), 0 0 11px rgba(30, 132, 242, 0.78),
+      0 0 16px rgba(30, 132, 242, 0.92);
+  }
+}

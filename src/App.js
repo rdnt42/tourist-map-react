@@ -1,15 +1,16 @@
 import React from 'react';
 import './App.css';
-import PointsMap from './components/PointsMap';
-import Login from './components/Login';
-import { useAuth } from './auth/authProvider'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
 import Navigation from './components/Navigation';
-import './components/scss/navigation.scss'
+import PointsMap from './components/PointsMap';
+import Login from './components/Login'
 import Registration from './components/Registration';
 
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import NeonButton from './components/NeonButton';
+
 function App() {
-  const [logged] = useAuth();
+
   return (
     // <div>
     //   <PointsMap />
@@ -17,7 +18,9 @@ function App() {
 
     <Router>
       <div className="App" />
+
       <Navigation />
+      <NeonButton text="Go deeper" url="/map" />
       <Switch>
         <Route path='/map' component={PointsMap} />
         <Route path='/login' component={Login} />

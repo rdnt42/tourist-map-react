@@ -1,0 +1,114 @@
+// body {
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-evenly;
+//   min-height: 100vh;
+//   font-family: "Roboto Mono", monospace;
+//   background-color: #252525;
+// }
+
+.neon-button {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  display: inline-block;
+  padding: 20px 36px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: inherit;
+  font-family: inherit;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  color: #ff4893;
+  background-color: transparent;
+  border: none;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: 0.2s;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+
+  &:hover,
+  &:focus {
+    color: #ffffff;
+    background-color: #ff4893;
+    box-shadow: 0 0 12px #ff4893, 0 0 40px #ff4893, 0 0 80px #ff4893;
+    transition-delay: 1s;
+  }
+
+  &:active {
+    box-shadow: 0 0 8px #ff4893, 0 0 16px #ff4893, 0 0 32px #ff4893;
+    transition-delay: 0s;
+  }
+}
+
+.button__line {
+  position: absolute;
+  border-radius: 2px;
+
+  &--top {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    transform: translateX(-100%);
+    background-image: linear-gradient(to right, transparent, #ff4893);
+
+    .neon-button:hover &,
+    .neon-button:focus & {
+      transform: translateX(100%);
+      transition: 1s 0.25s;
+    }
+  }
+
+  &--bottom {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    transform: translateX(100%);
+    background-image: linear-gradient(to left, transparent, #ff4893);
+
+    .neon-button:hover &,
+    .neon-button:focus & {
+      transform: translateX(-100%);
+      transition: 1s 0.25s;
+    }
+  }
+
+  &--left {
+    bottom: 0;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    transform: translateY(100%);
+    background-image: linear-gradient(to top, transparent, #ff4893);
+
+    .neon-button:hover &,
+    .neon-button:focus & {
+      transform: translateY(-100%);
+      transition: 1s;
+    }
+  }
+
+  &--right {
+    bottom: 0;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    transform: translateY(-100%);
+    background-image: linear-gradient(to bottom, transparent, #ff4893);
+
+    .neon-button:hover &,
+    .neon-button:focus & {
+      transform: translateY(100%);
+      transition: 1s;
+    }
+  }
+}

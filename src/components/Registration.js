@@ -10,23 +10,48 @@ function Registration() {
         password: ''
     });
 
-    const [error, setError] = useState('')
+    const [loginError, setLoginError] = useState({
+        state: '',
+        message: ''
+    })
+    // const [passwordError, setPasswordError] = useState({
+    //     state: '',
+    //     message: ''
+    // })
 
     function parseResponse(data) {
         switch (data.state) {
             case "USER_ALREADY_EXIST":
-                setError("Пользователь с таким именем уже существует")
+                setLoginError({
+                    error: "error",
+                    message: "Пользователь с таким именем уже существует"
+                })
+
+                setCredentials({ ...credentials, name: '' })
+
                 break;
 
             default:
-                setError("")
+                //setError("")
                 break;
 
         }
     }
 
     const onChange = ({ target: { name, value } }) => {
-        if (error) setError('')
+        if (loginError.error) {
+            setCredentials({
+                name: '',
+                password: ''
+            })
+            console.log("err")
+            setLoginError({
+                error: '',
+                message: ''
+            })
+            console.log("err", loginError)
+            console.log("credentials", credentials)
+        }
         setCredentials({ ...credentials, [name]: value })
     };
 
@@ -65,11 +90,11 @@ function Registration() {
             <h1>Registration page</h1>
             <form onSubmit={onSubmit}>
                 <label htmlFor="name">Email</label>
-                <input
+                <input className={loginError.error}
                     name="name"
                     type="text"
-                    placeholder="Enter your name"
-                    value={error || credentials.name}
+                    placeholder={loginError.message || "Enter your name"}
+                    value={credentials.name}
                     onChange={onChange}
                 />
                 <label htmlFor="password">Password</label>
@@ -80,7 +105,7 @@ function Registration() {
                     value={credentials.password}
                     onChange={onChange}
                 />
-                <button type="submit">Login</button>
+                <button type="submit">Register</button>
             </form>
         </>
     )
