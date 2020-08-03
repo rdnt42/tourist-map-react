@@ -10,6 +10,7 @@ import LoginContainer from './components/containers/LoginContainer';
 import RegistrationContainer from './components/containers/RegistrationContainer';
 
 function App() {
+  var currentLocation = window.location.pathname;
 
   return (
     // <div>
@@ -18,8 +19,7 @@ function App() {
 
     <Router>
       <div className="App" />
-
-      <Navigation />
+      <Navigation location={currentLocation} />
       <NeonButton text="Go deeper" url="/map" />
       <Switch>
         <Route path='/map' component={PointsMap} />
